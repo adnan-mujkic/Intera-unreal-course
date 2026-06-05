@@ -55,3 +55,16 @@ void UMyTickableWorldSubsystem::Tick(float DeltaTime)
 
 	UE_LOG(LogTemp, Warning, TEXT("Updating closest interactable actor: %s, distance: %f"), ClosestInteractable ? *ClosestInteractable->GetActorNameOrLabel() : TEXT("NULL"), FMath::Sqrt(ClosestDistance));
 }
+
+AActor* UMyTickableWorldSubsystem::GetClosestActor() const
+{
+	if (!PlayerActor || !ClosestInteractable) return nullptr;
+
+	const float DistanceTreshold = FMath::Pow(200.f, 2.f);
+
+	if (FVector::DistSquared(PlayerActor->GetActorLocation(), ClosestInteractable->GetActorLocation()) < DistanceTreshold) {
+		return ClosestInteractable;
+	}
+
+	return nullptr;
+}

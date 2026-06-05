@@ -23,6 +23,9 @@ public:
 	virtual void OnWorldEndPlay(UWorld& InWorld) override;
 	virtual void Tick(float DeltaTime) override;
 	virtual TStatId GetStatId() const override { return TStatId(); }
+
+	UFUNCTION(BlueprintPure, Category = "Interactable System")
+	AActor* GetClosestActor() const;
 	
 private:
 
